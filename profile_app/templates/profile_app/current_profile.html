@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+    Профиль пользователя
+{% endblock %}
+{% block body %}
+    <div class="content-section">
+        <div class="media">
+{#            <div class="col-lg-6 offset-3">#}
+                {% if user.profile.profile_picture %}
+                    <img class="rounded-circle account-img" src="{{ user.profile.profile_picture.url }}">
+                {% endif %}
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
+                    <p class="text-secondary">{{ user.profile.address }}</p>
+                    <p class="text-secondary">{{ user.profile.phone_number }}</p>
+                    <p class="text-secondary">{{ user.profile.birth_date }}</p>
+                </div>
+{#            </div>#}
+        </div>
+    </div>
+{% endblock %}

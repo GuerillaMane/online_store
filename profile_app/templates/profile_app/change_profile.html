@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Изменение профиля
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-6 offset-3">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="content-section">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Change Profile Info</legend>
+                    {{ user_form | crispy }}
+                    {{ profile_form | crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Confirm Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

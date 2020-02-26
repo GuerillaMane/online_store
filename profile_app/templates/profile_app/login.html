@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+    Авторизация
+{% endblock %}
+{% block body %}
+    <script src="{% static 'shop/js/django_form.js' %}"></script>
+{#    <div class="col-lg-offset-4">#}
+    <div class="col-lg-6 offset-3">
+        {% if form.errors %}
+            <p>Пароль или логин не верны</p>
+        {% endif %}
+        <form id="login_form" method="post" action="{% url 'profile_app:login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button id="sub_btn" name="submit">Вход</button></p>
+
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {# тут двигаемся по ред     иректу, если "авторизация прошла успешно" :) #}
+        </form>
+        <script type="text/javascript">
+            bootstrap_form('#login_form');
+            document.getElementById('sub_btn').setAttribute('class', 'btn btn-info form-control mt-2');
+            let lbls = document.getElementsByTagName('label');
+            lbls[0].innerText = 'Имя пользователя';
+            lbls[1].innerText = 'Пароль'
+        </script>
+    </div>
+{% endblock %}
