@@ -35,6 +35,10 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+CART_SESSION_ID = 'cart'
+# ключ для хранения корзины в сессии пользователя
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,8 +53,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
 
-    'shop',
     'profile_app',
+    'shop',
+    'cart'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

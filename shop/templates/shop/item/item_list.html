@@ -12,24 +12,20 @@
     <div class="card col-lg-4" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">
-{#                {% if user.is_superuser %}#}
-{#                    <a href="{% url 'shop_app:item_detail' item.id %}">#}
-                        {{ item.name }}
-{#                    </a>#}
-{#                {% else %}#}
-{#                    <a href="{% url 'shop_app:current_item' item.id %}">#}
-{#                        {{ item.name }}#}
-{#                    </a>#}
-{#                {% endif %}#}
+                <a href="{{ item.get_absolute_url }}">
+                    {{ item.name }}
+                </a>
             </h5>
             <p class="card-text">
                 <p>
                     Магазин {{ item.shop.name }}
                 </p>
             {% if item.item_picture %}
-                <p>
-                    <img src="{{ item.item_picture.url }}" style="max-width: 10rem">
-                </p>
+                <a href="{{ item.get_absolute_url }}">
+                    <p>
+                        <img src="{{ item.item_picture.url }}" style="max-width: 10rem">
+                    </p>
+                </a>
             {% else %}
                 <p >
                   Изображение отсутствует

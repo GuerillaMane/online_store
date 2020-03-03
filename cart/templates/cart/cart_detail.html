@@ -1,0 +1,66 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+    Ваша корзина
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-6 offset-3">
+        <h1>
+            Ваша корзина
+        </h1>
+    </div>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Remove</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in cart %}
+                {% with item=obj.item %}
+                {# перед и после равно пробелов быть не должно, иначе TemplateSyntaxError #}
+                    <tr>
+                        <td>
+                            <a href="{{ item.get_absolute_url }}">
+                            {% if item.item_picture %}
+                                <img src="{{ item.item_picture.url }}">
+                            {% else %}
+                                <p>
+                                    Изображение отсутствует
+                                </p>
+                            {% endif %}
+                            </a>
+                        </td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ obj.quantity }}</td>
+                        <td>
+                            <a href="{% url "cart:cart_remove" item.id%}">
+                                Remove
+                            </a>
+                        </td>
+                        <td class="num">${{ item.price }}</td>
+                        <td class="num">${{ obj.total_price }}</td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+            <tr class="table-warning">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="text-right">
+        <a href="{% url "shop:item_list" %}" class="btn btn-info form-control">Continue shopping</a>
+        <a href="#" class="btn btn-info form-control">Checkout</a>
+    </p>
+{% endblock %}

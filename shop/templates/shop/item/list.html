@@ -1,0 +1,66 @@
+{% extends 'shop/base.html' %}
+{% block title %}
+  Список товаров
+{% endblock %}
+
+{% block body %}
+  <div class="col-lg-12 text-center">
+    <a href="{% url 'shop:index' %}">На главную</a>
+  </div>
+
+  {% for item in item_list %}
+    <div class="card col-lg-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">
+{#                {% if user.is_superuser %}#}
+                    <a href="{{ item.get_absolute_url }}">
+                        {{ item.name }}
+                    </a>
+{#                {% else %}#}
+{#                    <a href="{% url 'shop_app:current_item' item.id %}">#}
+{#                        {{ item.name }}#}
+{#                    </a>#}
+{#                {% endif %}#}
+            </h5>
+            <p class="card-text">
+                <p>
+                    Магазин {{ item.shop.name }}
+                </p>
+            {% if item.item_picture %}
+                <p>
+                    <img src="{{ item.item_picture.url }}" style="max-width: 10rem">
+                </p>
+            {% else %}
+                <p >
+                  Изображение отсутствует
+                </p>
+            {% endif %}
+                <p>
+                    Цена: {{ item.price }}
+                </p>
+                <p>
+                    Есть на складе:
+                    {% if item.available %}
+                        Да
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </p>
+            </p>
+        </div>
+    </div>
+  {% endfor %}
+
+  {% include 'shop/pagination.html' with request=request page_obj=page_obj paginator=paginator %}
+
+    {% if user.is_superuser %}
+        <div class="col-lg-12 mt-2 text-center ">
+            <a class="btn btn-info form-control"
+{#               href="{% url 'shop_app:item_create' %}"#}
+                    href="#"
+            >
+                Добавить продукт
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

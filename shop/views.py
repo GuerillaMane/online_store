@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -10,6 +10,7 @@ from .models import (
     Shop,
     Category,
 )
+from cart.forms import CartAddForm
 
 
 # Create your views here.
@@ -21,13 +22,13 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 
 class ItemListView(ListView):
-    template_name = 'shop/item_list.html'
+    template_name = 'shop/item/item_list.html'
     model = Item
     context_object_name = 'item_list'
     paginate_by = 3
 
     def get_queryset(self):
-        return Item.objects.all()
+        return Item.objects.filter(available=True)
 
     def get_paginate_by(self, queryset):
         page_number = self.request.GET.get('page_number')
@@ -37,3 +38,22 @@ class ItemListView(ListView):
 
     def get(self, request, *args, **kwargs):
         return super(ItemListView, self).get(request, *args, **kwargs)
+
+
+def item_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    items = Item.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        items = items.filter(category=category)
+    return render(request, 'shop/item/list.html',
+                  {'category': category,
+                   'categories': categories,
+                   'items': items})
+
+
+def item_detail(request, id, slug):
+    item = get_object_or_404(Item, id=id, slug=slug, available=True)
+    cart_form = CartAddForm()
+    return render(request, 'shop/item/item_detail.html', {'item': item, 'cart_form': cart_form})

@@ -60,6 +60,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    # def get_absolute_url(self):
+    #     return reverse('shop:item_list_by_category',
+    #                    args=[self.slug])
+
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
@@ -144,8 +148,10 @@ class Item(models.Model):
 
     def delete(self, *args, **kwargs):
         self.item_picture.delete(save=False)
-
         super(Item, self).delete(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('shop:item_detail', args=[self.id, self.slug])
 
     class Meta:
         verbose_name = 'Товар'
