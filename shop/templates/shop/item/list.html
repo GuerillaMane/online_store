@@ -55,12 +55,10 @@
 
     {% if user.is_superuser %}
         <div class="col-lg-12 mt-2 text-center ">
-            <a class="btn btn-info form-control"
-{#               href="{% url 'shop_app:item_create' %}"#}
-                    href="#"
-            >
+            <a class="btn btn-info form-control" href="{% url 'shop:item_create' %}">
                 Добавить продукт
             </a>
         </div>
     {% endif %}
+
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'shop/base.html' %}
+{% block title %}
+  Создание продукта
+{% endblock %}
+{% block body %}
+    <div class="col-lg-12">
+        <form id="shop_form" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+                <button type="submit">
+                    {% if form.instance.id %}
+                        Обновить
+                    {% else %}
+                        Сохранить
+                    {% endif %}
+                </button>
+            </p>
+        </form>
+
+        {% if form.instance.id %}
+            <a href="{% url 'shop:shop_delete' form.instance.id %}">
+                Удалить
+            </a>
+        {% endif %}
+
+        <script type="application/javascript">
+            bootstrap_form('#shop_form')
+        </script>
+    </div>
+{% endblock %}

@@ -7,7 +7,13 @@ from .views import (
     ItemDelete,
     ItemUpdate,
     item_detail,
-    item_list,
+    # item_list,
+
+    ShopList,
+    ShopDetail,
+    ShopCreate,
+    ShopUpdate,
+    ShopDelete,
 )
 
 app_name = 'shop'
@@ -20,5 +26,11 @@ urlpatterns = [
     path('item_delete/<int:pk>/', ItemDelete.as_view(), name='item_delete'),
     # url(r'^$', item_list, name='item_list'),
     # url(r'^(?P<category_slug>[-\w]+)/$', item_list, name='item_list_by_category'),
-    url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', item_detail, name='item_detail')
+    url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', item_detail, name='item_detail'),
+
+    path('shop_list/', ShopList.as_view(), name="shop_list"),
+    path('shop_info/<int:pk>', ShopDetail.as_view(), name='shop_detail'),
+    path('shop_create/', ShopCreate.as_view(), name='shop_create'),
+    path('shop_update/<int:pk>/', ShopUpdate.as_view(), name='shop_update'),
+    path('shop_delete/<int:pk>/', ShopDelete.as_view(), name='shop_delete'),
 ]

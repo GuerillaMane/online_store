@@ -18,7 +18,10 @@
             </h5>
             <p class="card-text">
                 <p>
-                    Магазин {{ item.shop.name }}
+                    Магазин
+                    <a href="{% url 'shop:shop_detail' item.shop.id %}">
+                        {{ item.shop.name }}
+                    </a>
                 </p>
             {% if item.item_picture %}
                 <a href="{{ item.get_absolute_url }}">
@@ -56,4 +59,5 @@
             </a>
         </div>
     {% endif %}
+
 {% endblock %}

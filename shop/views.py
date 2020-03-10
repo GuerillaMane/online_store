@@ -7,6 +7,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
+    DetailView,
 )
 from .models import (
     Item,
@@ -82,4 +83,36 @@ class ItemUpdate(UpdateView):
 class ItemDelete(DeleteView):
     model = Item
     success_url = reverse_lazy('shop:item_list')
+    template_name = 'shop/confirm_delete.html'
+
+
+class ShopDetail(DetailView):
+    template_name = 'shop/shop/shop_detail.html'
+    model = Shop
+    context_object_name = 'shop'
+
+
+class ShopList(ListView):
+    template_name = 'shop/shop/shop_list.html'
+    model = Shop
+    context_object_name = 'shop_list'
+
+
+class ShopCreate(CreateView):
+    template_name = 'shop/shop/shop_create.html'
+    model = Shop
+    form_class = ShopForm
+
+
+class ShopUpdate(UpdateView):
+    template_name = 'shop/shop/shop_create.html'
+    model = Shop
+    form_class = ShopForm
+
+
+class ShopDelete(DeleteView):
+    model = Shop
+    # при успешном удалении редиректим на....
+    success_url = reverse_lazy('shop:shop_list')
+    # указываем шаблон для страницы подтверждения удаления
     template_name = 'shop/confirm_delete.html'
