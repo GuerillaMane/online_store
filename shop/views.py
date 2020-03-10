@@ -4,11 +4,19 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     ListView,
     TemplateView,
+    CreateView,
+    UpdateView,
+    DeleteView,
 )
 from .models import (
     Item,
     Shop,
     Category,
+)
+from .forms import (
+    ItemForm,
+    ShopForm,
+    CategoryForm,
 )
 from cart.forms import CartAddForm
 
@@ -57,3 +65,21 @@ def item_detail(request, id, slug):
     item = get_object_or_404(Item, id=id, slug=slug, available=True)
     cart_form = CartAddForm()
     return render(request, 'shop/item/item_detail.html', {'item': item, 'cart_form': cart_form})
+
+
+class ItemCreate(CreateView):
+    template_name = 'shop/item/item_create.html'
+    model = Item
+    form_class = ItemForm
+
+
+class ItemUpdate(UpdateView):
+    template_name = 'shop/item/item_create.html'
+    model = Item
+    form_class = ItemForm
+
+
+class ItemDelete(DeleteView):
+    model = Item
+    success_url = reverse_lazy('shop:item_list')
+    template_name = 'shop/confirm_delete.html'

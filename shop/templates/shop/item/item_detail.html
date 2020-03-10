@@ -38,4 +38,11 @@
             <input type="submit" value="Добавить в корзину">
         </form>
     {% endif %}
+    {% if user.is_superuser %}
+        <div class="col-lg-12 mt-2 text-center ">
+            <a class="btn btn-info form-control" href="{% url 'shop:item_update' item.id%}">
+                Обновить продукт
+            </a>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -31,7 +31,7 @@
                         <td>
                             <a href="{{ item.get_absolute_url }}">
                             {% if item.item_picture %}
-                                <img src="{{ item.item_picture.url }}">
+                                <img src="{{ item.item_picture.url }}" style="max-width: 10rem">
                             {% else %}
                                 <p>
                                     Изображение отсутствует
@@ -46,8 +46,8 @@
                                 Remove
                             </a>
                         </td>
-                        <td class="num">${{ item.price }}</td>
-                        <td class="num">${{ obj.total_price }}</td>
+                        <td class="num">{{ item.price }}</td>
+                        <td class="num">{{ obj.total_price }}</td>
                     </tr>
                 {% endwith %}
             {% endfor %}
