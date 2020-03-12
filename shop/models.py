@@ -24,7 +24,7 @@ class Shop(models.Model):
         return f'{self.name} {self.address}'
 
     def get_absolute_url(self):
-        return reverse('shop_app:shop_update', args=(self.id,))
+        return reverse('shop:shop_update', args=(self.id,))
 
     class Meta:
         verbose_name = 'Магазин'
