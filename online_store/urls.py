@@ -25,6 +25,8 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     # url(r'^api-auth/', include('rest_framework.urls')),
     path('profile/', include('profile_app.urls', namespace='profile_app')),
-    path('', include('shop.urls', namespace='shop'))
+    url(r'^cart/', include('cart.urls', namespace='cart')),  # обязательно добавляем перед shop.urls
+    url(r'^', include('shop.urls', namespace='shop')),
+    # path('', include('shop.urls', namespace='shop'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

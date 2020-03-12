@@ -1,0 +1,48 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ item.name }}
+{% endblock %}
+
+{% block body %}
+     <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <div class="col-lg-6 offset-3">
+                    <h2 class="account-heading">{{ item.name }}</h2>
+                    <p class="text-secondary">
+                        {% if item.item_picture %}
+                             <img src="{{ item.item_picture.url }}" style="max-width: 15rem">
+                        {% else %}
+                            <p>
+                                Изображение отсутствует
+                            </p>
+                        {% endif %}
+                    </p>
+                    <p class="text-secondary">{{ item.description | linebreaks}}</p>
+                    <p class="text-secondary">{{ item.price }}</p>
+{#                    <p class="text-secondary">#}
+{#                        <a class="my_class" href="{% url 'shop_app:shop_info' item.department.shop.id %}">#}
+{#                            {{ item.department.shop }}#}
+{#                        </a>#}
+{#                    </p>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+        <form action="{% url "cart:cart_add" item.id %}" method="post">
+            {{ cart_form }}
+            {% csrf_token %}
+            <input type="submit" value="Добавить в корзину">
+        </form>
+    {% endif %}
+    {% if user.is_superuser %}
+        <div class="col-lg-12 mt-2 text-center ">
+            <a class="btn btn-info form-control" href="{% url 'shop:item_update' item.id%}">
+                Обновить продукт
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
