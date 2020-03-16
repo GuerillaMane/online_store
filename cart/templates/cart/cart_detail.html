@@ -59,8 +59,11 @@
             </tbody>
         </table>
     </div>
-    <p class="text-right">
+    <p>
+    <div style="float: left; padding-right: 77%">
         <a href="{% url "shop:item_list" %}" class="btn btn-info form-control">Continue shopping</a>
-        <a href="#" class="btn btn-info form-control">Checkout</a>
-    </p>
+    </div>
+    <div>
+        <a href="{% url "order_app:order_create" %}" class="btn btn-info form-control">Checkout</a>
+    </div>
 {% endblock %}

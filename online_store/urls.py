@@ -27,6 +27,7 @@ urlpatterns = [
     path('profile/', include('profile_app.urls', namespace='profile_app')),
     url(r'^cart/', include('cart.urls', namespace='cart')),  # обязательно добавляем перед shop.urls
     url(r'^', include('shop.urls', namespace='shop')),
+    url(r'^order/', include('order_app.urls', namespace='order_app')),
     # path('', include('shop.urls', namespace='shop'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

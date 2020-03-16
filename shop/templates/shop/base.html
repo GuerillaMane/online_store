@@ -51,7 +51,7 @@
                         Your cart
                         {% with total=cart|length %}
                             {% if cart|length > 0 %}
-                                [ {{ total }} ]
+                                [{{ total }}]
                             {% else %}
                                 [Empty]
                             {% endif %}
@@ -76,7 +76,8 @@
 {#            {% endif %}#}
 
             {% block body %}
-                <div class="col-lg-6 offset-3">
+{#                1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
+                <div class="col-lg-6 offset-3"> {# center here #}
                     <img src="{% static 'shop/pictures/bebe.png' %}">
                 </div>
             {% endblock %}

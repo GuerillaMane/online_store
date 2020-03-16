@@ -14,6 +14,11 @@ class Order(models.Model):
         max_length=256,
         verbose_name='Адрес доставки'
     )
+    phone_number = models.CharField(
+        max_length=32,
+        null=True,
+        verbose_name='Номер телефона'
+    )
     created = models.DateTimeField(
         auto_now_add=True
     )
