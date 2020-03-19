@@ -26,6 +26,7 @@ urlpatterns = [
     # url(r'^api-auth/', include('rest_framework.urls')),
     path('profile/', include('profile_app.urls', namespace='profile_app')),
     url(r'^cart/', include('cart.urls', namespace='cart')),  # обязательно добавляем перед shop.urls
+    url(r'^promocodes/', include('promocodes.urls', namespace='promocodes')),  # тоже обязательно перед shop
     url(r'^', include('shop.urls', namespace='shop')),
     url(r'^order/', include('order_app.urls', namespace='order_app')),
     # path('', include('shop.urls', namespace='shop'))

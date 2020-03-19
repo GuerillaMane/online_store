@@ -1,6 +1,7 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_DOWN
 from django.conf import settings
 from shop.models import Item
+from promocodes.models import PromoCode
 
 
 class Cart(object):
@@ -13,6 +14,7 @@ class Cart(object):
             # сохранение пустой корзины в сессии
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        self.promocode_id = self.session.get('promocode_id')
 
     def add(self, item, quantity=1, update_quantity=False):
         # добавляем новый айтем либо обновляем его количество
@@ -59,3 +61,18 @@ class Cart(object):
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
+
+    @property
+    def promocode(self):
+        if self.promocode_id:
+            return PromoCode.objects.get(id=self.promocode_id)
+        return None
+
+    def get_discount(self):
+        if self.promocode:
+            discount = (self.promocode.discount / Decimal(100)) * self.get_total_price()
+            return discount.quantize(Decimal("1.00"), ROUND_HALF_DOWN)
+        return Decimal('0')
+
+    def get_discount_total_price(self):
+        return self.get_total_price() - self.get_discount()

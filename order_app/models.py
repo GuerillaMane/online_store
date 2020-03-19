@@ -1,6 +1,10 @@
 from django.db import models
+from decimal import Decimal, ROUND_HALF_DOWN
+from django.core.validators import MinValueValidator, MaxValueValidator
 from shop.models import Item
 from django.contrib.auth.models import User
+from promocodes.models import PromoCode
+
 
 # Create your models here.
 
@@ -29,6 +33,18 @@ class Order(models.Model):
         default=False
     )
 
+    promocode = models.ForeignKey(
+        PromoCode,
+        on_delete=models.DO_NOTHING,
+        related_name='orders',
+        null=True,
+        blank=True
+    )
+    discount = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+
     class Meta:
         ordering = (
             '-created',
@@ -40,7 +56,8 @@ class Order(models.Model):
         return 'Order {}'.format(self.id)
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return total_cost - (total_cost * (self.discount / Decimal('100'))).quantize(Decimal("1.00"), ROUND_HALF_DOWN)
 
 
 class OrderItem(models.Model):

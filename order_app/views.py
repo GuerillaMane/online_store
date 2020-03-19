@@ -13,7 +13,11 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             form.instance.client = request.user
-            order = form.save()
+            order = form.save(commit=False)
+            if cart.promocode:
+                order.promocode = cart.promocode
+                order.discount = cart.promocode.discount
+            order.save()
             for obj in cart:
                 OrderItem.objects.create(order=order,
                                          item=obj['item'],
