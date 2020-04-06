@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="col-lg-6 offset-3">
+    <div class="col-lg-6 offset-3" style="text-align: center">
         <h1>
             Ваша корзина
         </h1>
@@ -73,16 +73,22 @@
             </tbody>
         </table>
         <form action="{% url "promocodes:apply_code" %}" method="post">
-            {{ promocode_form }}
-            <input type="submit" value="Apply">
-            {% csrf_token %}
+            <div class="form-group" style="text-align: center">
+                {{ promocode_form }}
+                <input type="submit" value="Apply" class="btn btn-primary">
+                {% csrf_token %}
+            </div>
         </form>
     </div>
     <p>
-    <div style="float: left; padding-right: 77%">
-        <a href="{% url "shop:item_list" %}" class="btn btn-info form-control">Continue shopping</a>
+    <div class="d-flex flex-row">
+        <div class="p-2">
+            <a href="{% url "shop:item_list" %}" class="btn btn-primary">Continue shopping</a>
+        </div>
     </div>
-    <div>
-        <a href="{% url "order_app:order_create" %}" class="btn btn-info form-control">Checkout</a>
+    <div class="d-flex flex-row-reverse">
+        <div class="p-2">
+            <a href="{% url "order_app:order_create" %}" class="btn btn-primary">Checkout</a>
+        </div>
     </div>
 {% endblock %}
