@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import include
 from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     create_user,
@@ -15,5 +16,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/profile/login'), name='logout'),
     path('create_profile/', create_user, name='create_profile'),
     path('current_profile/', current_profile, name='current_profile'),
-    path('change_profile/', change_profile, name='change_profile')
+    path('change_profile/', change_profile, name='change_profile'),
+
+    path('api/', include('profile_app.api.urls')),
 ]

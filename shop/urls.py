@@ -33,4 +33,6 @@ urlpatterns = [
     path('shop_create/', ShopCreate.as_view(), name='shop_create'),
     path('shop_update/<int:pk>/', ShopUpdate.as_view(), name='shop_update'),
     path('shop_delete/<int:pk>/', ShopDelete.as_view(), name='shop_delete'),
+
+    path('api/', include('shop.api.urls')),
 ]

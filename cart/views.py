@@ -14,7 +14,7 @@ def cart_add(request, item_id):
     cart = Cart(request)
     item = get_object_or_404(Item, id=item_id)
     form = CartAddForm(request.POST)
-    if form.is_valid() and form.cleaned_data['quantity'] < item.stock:
+    if form.is_valid() and form.cleaned_data['quantity'] <= item.stock:
         cd = form.cleaned_data
         cart.add(item=item, quantity=cd['quantity'], update_quantity=cd['update'])
     return redirect('cart:cart_detail')

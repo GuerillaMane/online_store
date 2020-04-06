@@ -15,7 +15,7 @@ class Shop(models.Model):
         max_length=256,
         verbose_name='Адрес магазина'
     )
-    staff_amount = models.IntegerField(
+    staff_amount = models.PositiveIntegerField(
         blank=True,
         null=True
     )

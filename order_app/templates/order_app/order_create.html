@@ -6,28 +6,30 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Checkout</h1>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
-            {% for obj in cart %}
-                <li>
-                    {{ obj.quantity }}x {{ obj.item.name }}
-                    <span>${{ obj.total_price }}</span>
-                </li>
-            {% endfor %}
-            {% if cart.promocode %}
-                <li>
-                    "{{ cart.promocode.code }}" ({{ cart.promocode.discount }}% off)
-                    <span>- {{ cart.get_discount }}</span>
-                </li>
-            {% endif %}
-        </ul>
-        <p>Total: ${{ cart.get_discount_total_price|floatformat:"2" }}</p>
-    </div>
-    <form action="." method="post" class="order-form">
-        {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
-        {% csrf_token %}
-    </form>
+     <div class="col-lg-6 offset-3" style="text-align: center;">
+            <h1>Checkout</h1>
+            <div class="content-section">
+                <h3>Your order</h3>
+                <ul>
+                    {% for obj in cart %}
+                        <li>
+                            {{ obj.quantity }}x {{ obj.item.name }}
+                            <span>${{ obj.total_price }}</span>
+                        </li>
+                    {% endfor %}
+                    {% if cart.promocode %}
+                        <li>
+                            "{{ cart.promocode.code }}" ({{ cart.promocode.discount }}% off)
+                            <span>- {{ cart.get_discount }}</span>
+                        </li>
+                    {% endif %}
+                </ul>
+                <p>Total: ${{ cart.get_discount_total_price|floatformat:"2" }}</p>
+            </div>
+        <form action="." method="post" class="order-form">
+            {{ form.as_p }}
+            <p><input type="submit" value="Place order"></p>
+            {% csrf_token %}
+        </form>
+     </div>
 {% endblock %}

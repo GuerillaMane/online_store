@@ -23,7 +23,7 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    # url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^api-auth/', include('rest_framework.urls')),
     path('profile/', include('profile_app.urls', namespace='profile_app')),
     url(r'^cart/', include('cart.urls', namespace='cart')),  # обязательно добавляем перед shop.urls
     url(r'^promocodes/', include('promocodes.urls', namespace='promocodes')),  # тоже обязательно перед shop
