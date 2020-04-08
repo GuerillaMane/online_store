@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 # на базе UnitTest, от этого класса наследуем все классы для тестирования
 # в тестах создается тестовая база данных в памяти и по завершению тест-кейсов удаляется
 from .models import (
@@ -12,9 +12,9 @@ from django.urls import reverse
 
 # Create your tests here.
 
-USERNAME = 'admin'
-PASSWORD = 'admin'
-LOGIN_URL = '/profile/login/'
+# USERNAME = 'admin'
+# PASSWORD = 'admin'
+# LOGIN_URL = '/profile/login/'
 
 
 class TestShop(TestCase):
@@ -41,23 +41,21 @@ class TestShop(TestCase):
             created=datetime.now(),
             updated=datetime.now()
         )
+        self.client = Client()
 
         # self.item = Item()
         # self.item.department = self.department
         # self.item.description = 'someDescription'
         # self.item.price = 100.500
         # self.item.save()
-
-        self.user = User.objects.create(
-            username=USERNAME,
-            is_superuser=True,
-            password=PASSWORD
-        )
-        self.text_on_login_page = 'Username'
+        # self.user = User.objects.create(
+        #     username=USERNAME,
+        #     is_superuser=True,
+        #     password=PASSWORD
+        # )
+        # self.text_on_login_page = 'Username'
 
     def test_item_create(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.post('/item_create/', {
             'category': self.category.id,
             'shop': self.shop.id,
@@ -77,8 +75,6 @@ class TestShop(TestCase):
         self.assertEqual(new_item.id, 2)
 
     def test_item_update(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         new_item = Item.objects.create(
             category=self.category,
             shop=self.shop,
@@ -116,27 +112,19 @@ class TestShop(TestCase):
 
     # in a DeleteView, the GET request returns a confirmation page, and POST request deletes the object
     def test_item_delete_get_request(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.get(f'/item_delete/{self.item.id}/', follow=True)
         self.assertContains(response, 'Вы действительно хотите удалить')
 
     def test_item_delete_post_request(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.post(f'/item_delete/{self.item.id}/', follow=True)
         self.assertRedirects(response, '/item_list/', status_code=302)
 
     def test_item_detail(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.get(f'/{self.item.id}/{self.item.slug}', follow=True)
         self.assertContains(response, self.item.name)
         self.assertContains(response, self.item.description)
 
     def test_item_list(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         new_item = Item.objects.create(
             category=self.category,
             shop=self.shop,
@@ -168,8 +156,6 @@ class TestShop(TestCase):
         self.assertNotContains(response, not_available_item.name)
 
     def test_shop_create(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.post('/shop_create/', {
             'name': 'test_shop',
             'address': 'some_address',
@@ -185,8 +171,6 @@ class TestShop(TestCase):
         self.assertTemplateUsed(response, 'shop/shop/shop_create.html')
 
     def test_shop_update(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.post(f'/shop_update/{self.shop.id}/', {
             'name': 'updated_shop',
             'address': 'updated_address',
@@ -202,20 +186,14 @@ class TestShop(TestCase):
         self.assertEqual(self.shop.address, 'updated_address')
 
     def test_shop_delete_get_request(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.get(f'/shop_delete/{self.shop.id}/', follow=True)
         self.assertContains(response, 'Вы действительно хотите удалить')
 
     def test_shop_delete_post_request(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         response = self.client.post(f'/shop_delete/{self.shop.id}/', follow=True)
         self.assertRedirects(response, '/shop_list/', status_code=302)
 
     def test_shop_detail(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
-
         # response = self.client.post(f'/shop_info/{self.shop.id}/', follow=True)
         response = self.client.get(reverse('shop:shop_detail', kwargs={'pk': self.shop.id}))
         self.assertEqual(response.status_code, 200)
@@ -223,7 +201,6 @@ class TestShop(TestCase):
         self.assertTemplateUsed(response, 'shop/shop/shop_detail.html')
 
     def test_shop_list(self):
-        self.client.post(LOGIN_URL, {'username': USERNAME, 'password': PASSWORD})
         new_shop = Shop.objects.create(
             name='new_shop',
             address='new_address',
@@ -244,5 +221,11 @@ class TestShop(TestCase):
     def test_item_model_str(self):
         self.assertEqual(self.item.name, self.item.__str__())
 
+    def test_item_model_absolute_url(self):
+        self.assertEqual('/1/test_item/', self.item.get_absolute_url())
+
     def test_shop_model_str(self):
         self.assertEqual(f'{self.shop.name} {self.shop.address}', self.shop.__str__())
+
+    def test_shop_model_absolute_url(self):
+        self.assertEqual('/shop_update/1/', self.shop.get_absolute_url())
