@@ -6,16 +6,16 @@ from .models import (
     Shop,
     Item,
 )
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from datetime import datetime
 from django.urls import reverse
+
 
 # Create your tests here.
 
 # USERNAME = 'admin'
 # PASSWORD = 'admin'
 # LOGIN_URL = '/profile/login/'
-
 
 class TestShop(TestCase):
 

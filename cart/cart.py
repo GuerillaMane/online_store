@@ -33,7 +33,7 @@ class Cart(object):
         # обновляем сессию
         self.session[settings.CART_SESSION_ID] = self.cart
         # помечаем сессию как modified
-        self.session.modified = True
+        self.session['modified'] = True
 
     def remove(self, item):
         item_id = str(item.id)
@@ -60,7 +60,7 @@ class Cart(object):
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
-        self.session.modified = True
+        self.session['modified'] = True
 
     @property
     def promocode(self):
