@@ -20,6 +20,7 @@ class TestProfile(TestCase):
         response = self.client.get('/', follow=True)
         self.assertEqual(response.redirect_chain[0][1], 302)
         self.assertEqual(response.status_code, 200)
+        print(response)
         self.assertContains(response, self.login_text)
 
     def testAuthUrl(self):
