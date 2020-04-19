@@ -16,7 +16,8 @@
                 {% for shop in shop_list %}
                     <li class="list-group-item">
                         <a href="{% url 'shop:shop_detail' shop.id %}">
-                            {{ shop }}
+                            {{ shop.name }} </br>
+                            Адрес: {{ shop.address }}
                         </a>
                     </li>
                 {% endfor %}
@@ -25,7 +26,7 @@
     </div>
 
     {% if user.is_superuser %}
-        <div class="col-lg-12 mt-2 text-center" style="padding-top: 120px">
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 80px">
             <a class="btn btn-info form-control" href="{% url 'shop:shop_create' %}">
                 Add Shop
             </a>
