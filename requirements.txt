@@ -4,9 +4,11 @@ django-crispy-forms==1.8.1
 django-debug-toolbar==2.2
 django-tastypie==0.14.3
 djangorestframework==3.11.0
+gunicorn==20.0.4
 Pillow==7.0.0
 python-dateutil==2.8.1
 python-mimeparse==1.6.0
 pytz==2019.3
 six==1.14.0
 sqlparse==0.3.0
+whitenoise==5.0.1
