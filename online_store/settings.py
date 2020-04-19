@@ -20,16 +20,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'qd%ts(i9sfbo+)oe#2a53xu0u*onzb-_m@8r1f97d7qu&_(d-9'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'qd%ts(i9sfbo+)oe#2a53xu0u*onzb-_m@8r1f97d7qu&_(d-9'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = True
+# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['online-food-service.herokuapp.com']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['online-food-service.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/'
 # куда перенаправляем пользователя после авторизации
@@ -85,7 +85,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -169,7 +169,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Подключение статических файлов
 STATIC_URL = '/static/'
