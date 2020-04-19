@@ -1,9 +1,9 @@
 {% extends 'shop/base.html' %}
 {% block title %}
-  Создание продукта
+    Shop Creation
 {% endblock %}
 {% block body %}
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="padding-top: 10px">
         <form id="shop_form" method="post"
               enctype="multipart/form-data">
             {% csrf_token %}
@@ -11,9 +11,9 @@
             <p>
                 <button type="submit">
                     {% if form.instance.id %}
-                        Обновить
+                        Update
                     {% else %}
-                        Сохранить
+                        Save
                     {% endif %}
                 </button>
             </p>
@@ -21,7 +21,7 @@
 
         {% if form.instance.id %}
             <a href="{% url 'shop:shop_delete' form.instance.id %}">
-                Удалить
+                Delete
             </a>
         {% endif %}
 

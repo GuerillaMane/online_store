@@ -1,10 +1,10 @@
 {% extends 'shop/base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
-  Создание продукта
+    Item Creation
 {% endblock %}
 {% block body %}
-    <div class="col-lg-6 offset-3">
+    <div class="col-lg-6 offset-3" style="padding-top: 10px">
         <div class="content-section">
     <form id="item_form" method="post"
           enctype="multipart/form-data">
@@ -15,17 +15,18 @@
         <p>
             <button type="submit" class="bit btn-primary">
                 {% if form.instance.id %}
-                    Обновить
+                    Update
                 {% else %}
-                    Сохранить
+                    Save
                 {% endif %}
             </button>
         </p>
     </form>
     {% if form.instance.id %}
-      <a href="{% url 'shop:item_delete' form.instance.id %}">
-        Удалить
-      </a>
+        <a href="{% url 'shop:item_delete' form.instance.id %}">
+            Delete
+        </a>
     {% endif %}
-  </div>
+    </div>
+    </div>
 {% endblock %}

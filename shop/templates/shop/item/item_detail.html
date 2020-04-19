@@ -7,21 +7,21 @@
 {% endblock %}
 
 {% block body %}
-    <div class="col-lg-6 offset-3" style="text-align: center;">
+    <div class="col-lg-6 offset-3" style="text-align: center; padding-top: 30px">
         <div class="content-section">
                 <h2 class="account-heading">{{ item.name }}</h2>
                 <p class="text-secondary">
                     {% if item.item_picture %}
-                         <img src="{{ item.item_picture.url }}" style="max-width: 12rem;">
+                         <img src="{{ item.item_picture.url }}" style="max-width: 15rem; max-height: 13rem">
                     {% else %}
                         <p style="text-align: center">
-                            Изображение отсутствует
+                            No Image
                         </p>
                     {% endif %}
                 </p>
                 <p class="text-secondary">{{ item.description | linebreaks}}</p>
                 <p class="text-secondary">{{ item.price }} руб.</p>
-                <p class="text-secondary">{{ item.stock }} в наличии</p>
+                <p class="text-secondary">{{ item.stock }} in stock</p>
 {#                    <p class="text-secondary">#}
 {#                        <a class="my_class" href="{% url 'shop_app:shop_info' item.department.shop.id %}">#}
 {#                            {{ item.department.shop }}#}
@@ -30,18 +30,18 @@
             </div>
         </div>
     {% if user.is_authenticated %}
-        <form action="{% url "cart:cart_add" item.id %}" method="post">
+        <form action="{% url "cart:cart_add" item.id %}" method="post" style="padding-top: 30px">
             <div class="form-group">
                     {{ cart_form|crispy }}
                     {% csrf_token %}
-                <input type="submit" value="Добавить в корзину" class="bit btn-info">
+                <input type="submit" value="Add in Cart" class="bit btn-info">
             </div>
         </form>
     {% endif %}
     {% if user.is_superuser %}
-        <div class="col-lg-12 mt-2 text-center ">
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 50px">
             <a class="btn btn-info form-control" href="{% url 'shop:item_update' item.id%}">
-                Обновить продукт
+                Update Item
             </a>
         </div>
     {% endif %}

@@ -34,7 +34,7 @@ def order_create(request):
 
                 if obj['quantity'] > ch_item.stock:
                     cart.clear()
-                    return redirect('shop:item_list')
+                    return redirect('order_app:order_error')
                 else:
                     OrderItem.objects.create(order=order,
                                              item=obj['item'],
@@ -52,3 +52,7 @@ def order_create(request):
     else:
         form = OrderCreateForm
     return render(request, 'order_app/order_create.html', {'cart': cart, 'form': form})
+
+
+def order_error(request):
+    return render(request, 'order_app/order_error.html')

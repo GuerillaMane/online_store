@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="col-lg-6 offset-3" style="text-align: center;">
+    <div class="col-lg-6 offset-3" style="text-align: center; padding-top: 30px">
         <div class="content-section">
             <h2 class="account-heading">{{ shop.name }}</h2>
-            <p class="text-secondary">{{ shop.address }}</p>
+            <p class="text-secondary">Address: {{ shop.address }}</p>
         </div>
     </div>
 
     {% if user.is_superuser %}
-        <div class="col-lg-12 mt-2 text-center ">
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 50px">
             <a class="btn btn-info form-control" href="{% url 'shop:shop_update' shop.id %}">
-                Обновить магазин
+                Update Shop
             </a>
         </div>
     {% endif %}

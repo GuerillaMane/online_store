@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ promocode.code }}
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-6 offset-3" style="text-align: center; padding-top: 30px">
+        <div class="content-section">
+            <h2 class="account-heading">{{ promocode.code }}</h2>
+            <p class="text-secondary">Currently active: {{ promocode.is_active }}</p>
+            <p class="text-secondary">Discount: {{ promocode.discount }}%</p>
+            <p class="text-secondary">Valid From: {{ promocode.valid_from }}</p>
+            <p class="text-secondary">Valid To: {{ promocode.valid_to }}</p>
+        </div>
+    </div>
+
+    {% if user.is_superuser %}
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 50px">
+            <a class="btn btn-info form-control" href="{% url 'promocodes:promo_update' promocode.id %}">
+                Update Promocode
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -3,7 +3,7 @@
     Удаление продукта
 {% endblock %}
 {% block body %}
-    <div class="col-lg-6 offset-3">
+    <div class="col-lg-6 offset-3" style="padding-top: 70px">
         <form id="confirm_delete" method="post">
             {% csrf_token %}
             Вы действительно хотите удалить "{{ object }}"?

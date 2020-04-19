@@ -9,6 +9,7 @@ from .forms import (
 from .models import (
     Profile,
 )
+from promocodes.models import PromoCode
 
 
 # Create your views here.

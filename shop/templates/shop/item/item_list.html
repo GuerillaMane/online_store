@@ -1,15 +1,15 @@
 {% extends 'shop/base.html' %}
 {% block title %}
-  Список товаров
+    Item List
 {% endblock %}
 
 {% block body %}
-  <div class="col-lg-12 text-center">
-    <a href="{% url 'shop:index' %}">На главную</a>
+  <div class="col-lg-12 text-center" style="padding-top: 10px; padding-bottom: 10px">
+    <a href="{% url 'shop:index' %}">Back to Main</a>
   </div>
 
   {% for item in item_list %}
-    <div class="card col-lg-4" style="width: 18rem;">
+    <div class="card col-lg-4" style="width: 18rem; text-align: center">
         <div class="card-body">
             <h5 class="card-title">
                 <a href="{{ item.get_absolute_url }}">
@@ -18,7 +18,7 @@
             </h5>
             <p class="card-text">
                 <p>
-                    Магазин
+                    Shop:
                     <a href="{% url 'shop:shop_detail' item.shop.id %}">
                         {{ item.shop.name }}
                     </a>
@@ -26,24 +26,27 @@
             {% if item.item_picture %}
                 <a href="{{ item.get_absolute_url }}">
                     <p>
-                        <img src="{{ item.item_picture.url }}" style="max-width: 10rem">
+                        <img src="{{ item.item_picture.url }}" style="max-width: 10rem; max-height: 5rem">
                     </p>
                 </a>
             {% else %}
                 <p >
-                  Изображение отсутствует
+                  No Image
                 </p>
             {% endif %}
                 <p>
-                    Цена: {{ item.price }}
+                    Price: {{ item.price }} руб.
                 </p>
                 <p>
-                    Есть на складе:
+                    Available in stock:
                     {% if item.available %}
-                        Да
+                        Yes
                     {% else %}
-                        Нет
+                        No
                     {% endif %}
+                </p>
+                <p>
+                    Quantity: {{ item.stock }}
                 </p>
             </p>
         </div>
@@ -53,9 +56,9 @@
   {% include 'shop/pagination.html' with request=request page_obj=page_obj paginator=paginator %}
 
     {% if user.is_superuser %}
-        <div class="col-lg-12 mt-2 text-center ">
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 50px">
             <a class="btn btn-info form-control" href="{% url 'shop:item_create' %}">
-                Добавить продукт
+                Add Item
             </a>
         </div>
     {% endif %}

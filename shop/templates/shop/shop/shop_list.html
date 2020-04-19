@@ -7,7 +7,7 @@
 
 {% block body %}
 {#    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111#}
-    <div class="col-lg-6 offset-3">
+    <div class="col-lg-6 offset-3" style="padding-top: 20px">
         <div class="card" style="width:18rem; margin: auto" >
             <div class="card-header" style="text-align: center">
                 Список магазинов
@@ -25,9 +25,9 @@
     </div>
 
     {% if user.is_superuser %}
-        <div class="col-lg-12 mt-2 text-center">
+        <div class="col-lg-12 mt-2 text-center" style="padding-top: 120px">
             <a class="btn btn-info form-control" href="{% url 'shop:shop_create' %}">
-                Добавить магазин
+                Add Shop
             </a>
         </div>
     {% endif %}

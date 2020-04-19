@@ -4,7 +4,7 @@
     User Profile
 {% endblock %}
 {% block body %}
-    <div class="col-lg-6 offset-3" style="text-align: center;">
+    <div class="col-lg-6 offset-3" style="text-align: center; padding-top: 30px">
         <div class="content-section">
             {% if user.profile.profile_picture %}
                 <img class="rounded-circle account-img" src="{{ user.profile.profile_picture.url }}" style="max-width: 10rem">
@@ -14,7 +14,20 @@
                 <p class="text-secondary">{{ user.email }}</p>
                 <p class="text-secondary">{{ user.profile.address }}</p>
                 <p class="text-secondary">{{ user.profile.phone_number }}</p>
-                <p class="text-secondary">{{ user.profile.birth_date }}</p>
+                <p class="text-secondary">
+                    Birth date:
+                    {% if user.profile.birth_date %}
+                        {{ user.profile.birth_date }}
+                    {% else %}
+                        Not specified
+                    {% endif %}
+                </p>
+                <p class="text-info">Items in cart: {{ cart|length }}</p>
+                <div class="col-lg-12 mt-2 text-center" style="padding-top: 50px">
+                    <a class="btn btn-outline-success" href="{% url 'promocodes:promo_list' %}">
+                        Available Promocodes for You
+                    </a>
+                </div>
             </div>
         </div>
     </div>

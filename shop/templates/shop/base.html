@@ -36,7 +36,7 @@
 
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'shop:index' %}">Магазин получается</a>
+            <a class="navbar-brand" href="{% url 'shop:index' %}">Online Food Service</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -69,15 +69,8 @@
         </nav>
 
         <div class="row">
-{#            {% if user.is_authenticated %}#}
-{#                <div class="col-lg-6 offset-3">#}
-{#                    <img src="{% static 'shop/pictures/bebe.png' %}">#}
-{#                </div>#}
-{#            {% endif %}#}
-
             {% block body %}
-{#                1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#}
-                <div class="col-lg-6 offset-3" style="text-align: center;"> {# center here #}
+                <div class="col-lg-6 offset-3" style="text-align: center; padding-top: 150px">
                     <img src="{% static 'shop/pictures/bebe.png' %}">
                 </div>
             {% endblock %}

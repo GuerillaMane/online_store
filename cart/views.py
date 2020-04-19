@@ -14,6 +14,8 @@ def cart_add(request, item_id):
     cart = Cart(request)
     item = get_object_or_404(Item, id=item_id)
     form = CartAddForm(request.POST)
+    if form.is_valid() and form.cleaned_data['quantity'] > item.stock:
+        return redirect('cart:cart_error')
     if form.is_valid() and form.cleaned_data['quantity'] <= item.stock:
         cd = form.cleaned_data
         cart.add(item=item, quantity=cd['quantity'], update_quantity=cd['update'])
@@ -31,3 +33,7 @@ def cart_detail(request):
     cart = Cart(request)
     promocode_form = PromoCodeApplyForm()
     return render(request, 'cart/cart_detail.html', {'cart': cart, 'promocode_form': promocode_form})
+
+
+def cart_error(request):
+    return render(request, 'cart/cart_error.html')
