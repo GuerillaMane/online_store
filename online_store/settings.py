@@ -25,10 +25,10 @@ SECRET_KEY = 'qd%ts(i9sfbo+)oe#2a53xu0u*onzb-_m@8r1f97d7qu&_(d-9'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['online-food-service.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/'
