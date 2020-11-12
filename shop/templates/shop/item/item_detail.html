@@ -34,7 +34,7 @@
             <div class="form-group">
                     {{ cart_form|crispy }}
                     {% csrf_token %}
-                <input type="submit" value="Add in Cart" class="bit btn-info">
+                <input id = "id_add" type="submit" value="Add in Cart" class="bit btn-info">
             </div>
         </form>
     {% endif %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from PIL import Image
+from django.core.validators import MinValueValidator
 
 
 # Create your models here.
@@ -16,8 +17,7 @@ class Shop(models.Model):
         verbose_name='Адрес магазина'
     )
     staff_amount = models.PositiveIntegerField(
-        blank=True,
-        null=True
+        validators=[MinValueValidator(1)]
     )
 
     def __str__(self):
