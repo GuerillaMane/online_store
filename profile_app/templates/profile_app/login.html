@@ -13,7 +13,7 @@
         <form id="login_form" method="post" action="{% url 'profile_app:login' %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <p><button id="sub_btn" name="submit">Enter</button></p>
+            <p><button class="accept" name="submit">Enter</button></p>
 
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             {# тут двигаемся по редиректу, если "авторизация прошла успешно" :) #}
